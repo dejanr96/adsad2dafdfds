@@ -22,7 +22,7 @@
 
 	function inject() {
 		//add UI elements
-		if (window.location.href.substring(0, 26) == "http://kissanime.ru/Anime/" && document.getElementsByClassName("barTitle").length > 0) {
+		if (window.location.href.substring(0, 26) == "http://www.watchepisodes4.com/home/new-series/" && document.getElementsByClassName("barTitle").length > 0) {
 			//grabber widget
 			var grabberUIBox = document.createElement("div");
 			grabberUIBox.id = "grabberUIBox";
@@ -108,12 +108,10 @@
 	//js injected into the page, this gets the links
 	var grabberScript = `//thorou
 var katable = {};
-var identifier = "kissanime.ru_DownloadData";
-
+var identifier = "watchepisodes4.com_DownloadData";
 function KAsavetable() {
 	window.name = JSON.stringify(katable);
 }
-
 function KAloadtable() {
 	try { //check if string is valid JSON object
 		JSON.parse(window.name);
@@ -127,9 +125,8 @@ function KAloadtable() {
 	katable = {}; //not a JSON, abort
 	return false;
 }
-
 function KAstart(startnum, endnum) {
-	if (window.location.hostname != "kissanime.ru") {
+	if (window.location.hostname != "watchepisodes4.com") {
 		return false;
 	}
 	katable = {};
@@ -158,7 +155,6 @@ function KAstart(startnum, endnum) {
 	KAsavetable();
 	window.location.href = katable.linklist[katable.position]; //goto link selection
 }
-
 function KAwaitCaptcha() {
 	var barTitle = document.getElementsByClassName("barTitle");
 	if (barTitle.length == 0) {
@@ -169,7 +165,6 @@ function KAwaitCaptcha() {
 		}
 	}
 }
-
 function KAgetLink() {
 	var re = new RegExp('"https://openload.co/embed/(.*?)"');
 	var currentLink = document.body.innerHTML.match(re)[0];
@@ -185,7 +180,6 @@ function KAgetLink() {
 		window.location.href = katable.linklist[katable.position];
 	}
 }
-
 function KAprintLinks() {
 	var string = "";
 	for (var i = 0; i < katable.finishedlist.length; i++) { //string together all the links, seperated by spaces
@@ -210,7 +204,6 @@ function KAprintLinks() {
 	document.getElementById("grabberLinkContainer").style.display = "block"; //make the display visible
 	window.name = "";
 }
-
 function KAgetStreamLink() {
 	var ev = new MouseEvent("click");
 	var el = document.elementFromPoint(20, 20);
@@ -224,7 +217,6 @@ function KAgetStreamLink() {
 	}
 	katable.streamlinklist.push(streamLink);
 	katable.position++;
-
 	if (katable.position >= katable.finishedlist.length) {
 		katable.status = "finished";
 		KAsavetable();
@@ -234,7 +226,6 @@ function KAgetStreamLink() {
 		window.location.href = katable.finishedlist[katable.position];
 	}
 }
-
 function KAstartStreamLinks() {
 	katable.streamlinklist = [];
 	katable.position = 0;
@@ -242,7 +233,6 @@ function KAstartStreamLinks() {
 	KAsavetable();
 	window.location = katable.finishedlist[katable.position];
 }
-
 function KAshortenLinks() {
 	katable.finishedlistbackup = katable.finishedlist.slice(0);
 	for (var i in katable.finishedlist) {
@@ -250,7 +240,6 @@ function KAshortenLinks() {
 	}
 	KAprintLinks();
 }
-
 function KAdownloadAll(delay) {
 	links = document.getElementById("grabberStreamLinks");
 	for (var i = 0; i < links.children.length; i++) {
@@ -259,7 +248,6 @@ function KAdownloadAll(delay) {
 		}
 	}
 }
-
 function KAsiteload() {
 	if (KAloadtable()) { //check if data can be retrieved from window.name
 		if (katable.status == "captcha") { //check which state the script is supposed to be in and call the appropriate function
@@ -271,7 +259,6 @@ function KAsiteload() {
 		}
 	}
 }
-
 if (window.name !== "") {
 	KAsiteload();
 }`
